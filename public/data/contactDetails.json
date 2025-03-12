@@ -1,0 +1,11 @@
+{
+    "email": "johndoe@gmail.com",
+    "phone": "+123 456 7890",
+    "address": "50 London, 5678 ABC",
+    "socialLinks": {
+      "facebook": "https://facebook.com/johndoe",
+      "twitter": "https://twitter.com/johndoe",
+      "linkedin": "https://linkedin.com/in/johndoe"
+    }
+  }
+  

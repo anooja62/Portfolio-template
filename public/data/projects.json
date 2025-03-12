@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "title": "Project 1",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "image": "/images/projects.jpeg",
+    "link": "https://example.com/project1",
+    "githublink": "https://github.com/user/project1",
+    "projectsummary": [
+      "Implemented using React and Tailwind CSS.",
+      "Features a responsive UI with dark mode.",
+      "Integrated Firebase for authentication and data storage."
+    ],
+    "technologies": ["React", "Tailwind CSS", "Firebase", "Dark Mode"]
+  },
+  {
+    "id": 2,
+    "title": "Project 2",
+    "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem.",
+    "image": "/images/projects.jpeg",
+    "link": "https://example.com/project2",
+    "githublink": "https://github.com/user/project2",
+    "projectsummary": [
+      "Built with MERN stack (MongoDB, Express, React, Node.js).",
+      "Includes JWT-based authentication.",
+      "Supports CRUD operations for user management."
+    ],
+    "technologies": ["MongoDB", "Express", "React", "Node.js", "JWT"]
+  },
+  {
+    "id": 3,
+    "title": "Project 3",
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus.",
+    "image": "/images/projects.jpeg",
+    "link": "https://example.com/project3",
+    "githublink": "https://github.com/user/project3",
+    "projectsummary": [
+      "Developed an AI-powered chatbot.",
+      "Uses OpenAI API for natural language processing.",
+      "Deployed on Vercel for fast performance."
+    ],
+    "technologies": ["AI", "OpenAI API", "React", "Vercel"]
+  },
+  {
+    "id": 4,
+    "title": "Project 4",
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus.",
+    "image": "/images/projects.jpeg",
+    "link": "https://example.com/project4",
+    "githublink": "https://github.com/user/project4",
+    "projectsummary": [
+      "Created a task management app using React Native.",
+      "Supports offline mode with AsyncStorage.",
+      "Backend built with Node.js and MongoDB."
+    ],
+    "technologies": ["React Native", "AsyncStorage", "Node.js", "MongoDB"]
+  }
+]
