@@ -1,49 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import PropTypes from "prop-types";
 import { motion } from "framer-motion";
+import Header from "./Header";
+import endpoints from "../constants/endpoints";
+import FallbackSpinner from "./FallbackSpinner";
 
-const About = () => {
-  const [about, setAbout] = useState(null);
+function About({ header }) {
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch("/data/about.json")
+    fetch(endpoints.about)
       .then((res) => res.json())
-      .then((data) => setAbout(data))
-      .catch((err) => console.error("Error loading about:", err));
+      .then((res) => setData(res))
+      .catch((err) => console.error(err));
   }, []);
 
-  if (!about) return <p className="text-center text-gray-500">Loading...</p>;
-
   return (
-    <section className="bg-white text-gray-900 py-16 px-6 sm:px-12">
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
-        
-        {/* Image Section */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full md:w-1/2"
-        >
-          <img
-            src={about.image}
-            alt="About Me"
-            className="rounded-lg shadow-2xl w-full object-cover"
-          />
-        </motion.div>
-
-        {/* Text Section */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="w-full md:w-1/2"
-        >
-          <h2 className="text-4xl font-bold text-green-800 mb-6">ABOUT ME</h2>
-          <p className="text-gray-700 leading-relaxed">{about.description}</p>
-        </motion.div>
+    <>
+      <Header title={header} />
+      <div className="container mx-auto p-4">
+        {data ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col md:flex-row items-center gap-6"
+          >
+            <div className="text-left text-lg font-medium md:w-1/2">
+              <ReactMarkdown>{data.about}</ReactMarkdown>
+            </div>
+            <div className="flex justify-center items-center md:w-1/2">
+              <img
+                src={data?.imageSource}
+                alt="profile"
+                className="rounded-lg shadow-lg max-w-full"
+              />
+            </div>
+          </motion.div>
+        ) : (
+          <FallbackSpinner />
+        )}
       </div>
-    </section>
+    </>
   );
+}
+
+About.propTypes = {
+  header: PropTypes.string.isRequired,
 };
 
 export default About;
