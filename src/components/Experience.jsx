@@ -1,83 +1,51 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
-import ReactMarkdown from "react-markdown";
-import PropTypes from "prop-types";
-import { ThemeContext } from "styled-components";
-import { motion } from "framer-motion";
-import Header from "./Header";
-import endpoints from "../constants/endpoints";
-import FallbackSpinner from "./FallbackSpinner";
-import "../css/experience.css";
+import React, { useState, useEffect } from "react";
 
-const styles = {
-  ulStyle: "list-disc pl-5",
-  subtitleContainerStyle: "mt-2 mb-2",
-  subtitleStyle: "inline-block font-semibold",
-  inlineChild: "inline-block text-gray-500",
-  itemStyle: "mb-4",
-};
-
-function Experience({ header }) {
-  const theme = useContext(ThemeContext);
-  const [data, setData] = useState(null);
+const Experience = () => {
+  const [experienceData, setExperienceData] = useState([]);
 
   useEffect(() => {
-    fetch(endpoints.experiences)
+    fetch("/profile/experiences.json")
       .then((res) => res.json())
-      .then((res) => setData(res.experiences))
-      .catch((err) => console.error(err));
+      .then((data) => setExperienceData(data.experiences))
+      .catch((err) => console.error("Failed to load experience data:", err));
   }, []);
 
   return (
-    <>
-      <Header title={header} />
-      {data ? (
-        <div className="w-full flex justify-center px-4">
-          <div className="max-w-4xl w-full">
-            <Timeline lineColor={theme.timelineLineColor}>
-              {data.map((item) => (
-                <motion.div
-                  key={item.title + item.dateText}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <TimelineItem
-                    dateText={item.dateText}
-                    dateInnerStyle={{ background: theme.accentColor }}
-                    className={styles.itemStyle}
-                    bodyContainerStyle={{ color: theme.color }}
-                  >
-                    <h2 className="text-xl font-bold">{item.title}</h2>
-                    <div className={styles.subtitleContainerStyle}>
-                      <h4 className={`${styles.subtitleStyle} text-${theme.accentColor}`}>{item.subtitle}</h4>
-                      {item.workType && <h5 className={styles.inlineChild}>· {item.workType}</h5>}
-                    </div>
-                    <ul className={styles.ulStyle}>
-                      {item.workDescription.map((point) => (
-                        <li key={point} className="mb-2">
-                          <ReactMarkdown
-                            children={point}
-                            components={{ p: "span" }}
-                          />
-                        </li>
-                      ))}
-                    </ul>
-                  </TimelineItem>
-                </motion.div>
-              ))}
-            </Timeline>
-          </div>
-        </div>
-      ) : (
-        <FallbackSpinner />
-      )}
-    </>
-  );
-}
+    <div className="bg-black text-white min-h-screen flex flex-col items-center px-6 py-12">
+      {/* Title */}
+      <h1 className="text-5xl font-bold text-center mb-12">Experience</h1>
 
-Experience.propTypes = {
-  header: PropTypes.string.isRequired,
+      {/* Timeline Container */}
+      <div className="relative w-full max-w-4xl">
+        {/* Vertical Line */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px] bg-gray-600"></div>
+
+        {/* Experience Cards */}
+        {experienceData.map((exp, index) => (
+          <div key={index} className="relative flex items-center mb-12 w-full">
+            {/* Date Label */}
+            <div className={`absolute ${index % 2 === 0 ? "left-0" : "right-0"} bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold`}>
+              {exp.dateText}
+            </div>
+
+            {/* Timeline Dot */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gray-300 border-4 border-gray-600 rounded-full"></div>
+
+            {/* Experience Card */}
+            <div className={`bg-gray-900 p-6 rounded-xl shadow-lg w-[90%] sm:w-[45%] ${index % 2 === 0 ? "ml-auto" : "mr-auto"}`}>
+              <h3 className="text-lg font-semibold">{exp.title}</h3>
+              <h4 className="text-blue-400 font-medium">{exp.subtitle} · {exp.workType}</h4>
+              <ul className="text-gray-300 mt-2 list-disc list-inside">
+                {exp.workDescription.map((desc, i) => (
+                  <li key={i} dangerouslySetInnerHTML={{ __html: desc }}></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Experience;

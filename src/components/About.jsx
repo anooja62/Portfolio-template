@@ -1,53 +1,40 @@
 import React, { useState, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import PropTypes from "prop-types";
-import { motion } from "framer-motion";
-import Header from "./Header";
-import endpoints from "../constants/endpoints";
-import FallbackSpinner from "./FallbackSpinner";
 
-function About({ header }) {
-  const [data, setData] = useState(null);
+const About = () => {
+  const [aboutData, setAboutData] = useState({ about: "", imageSource: "" });
 
   useEffect(() => {
-    fetch(endpoints.about)
+    fetch("/profile/about.json")
       .then((res) => res.json())
-      .then((res) => setData(res))
-      .catch((err) => console.error(err));
+      .then((data) => setAboutData(data))
+      .catch((err) => console.error("Failed to load about data:", err));
   }, []);
 
   return (
-    <>
-      <Header title={header} />
-      <div className="container mx-auto p-4">
-        {data ? (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row items-center gap-6"
-          >
-            <div className="text-left text-lg font-medium md:w-1/2">
-              <ReactMarkdown>{data.about}</ReactMarkdown>
-            </div>
-            <div className="flex justify-center items-center md:w-1/2">
-              <img
-                src={data?.imageSource}
-                alt="profile"
-                className="rounded-lg shadow-lg max-w-full"
-              />
-            </div>
-          </motion.div>
-        ) : (
-          <FallbackSpinner />
-        )}
-      </div>
-    </>
-  );
-}
+    <div className="bg-black text-white min-h-screen flex flex-col items-center p-6 md:p-10">
+      {/* Centered Title */}
+      <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">About</h1>
 
-About.propTypes = {
-  header: PropTypes.string.isRequired,
+      {/* Content Wrapper */}
+      <div className="max-w-5xl w-full flex flex-col md:flex-row items-center">
+        {/* Left Side - Text */}
+        <div className="w-full md:w-2/3 text-left px-4">
+          <p className="text-base md:text-lg leading-relaxed">{aboutData.about}</p>
+        </div>
+
+        {/* Right Side - Image */}
+        <div className="w-full md:w-1/3 flex justify-center mt-6 md:mt-0">
+          {aboutData.imageSource && (
+            <img
+              src={aboutData.imageSource}
+              alt="Profile"
+              className="w-60 h-60 md:w-80 md:h-80 object-cover bg-white p-2 rounded-lg"
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default About;

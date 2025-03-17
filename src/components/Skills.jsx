@@ -1,62 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import ReactMarkdown from 'react-markdown';
-import PropTypes from 'prop-types';
-import Header from './Header';
-import endpoints from '../constants/endpoints';
-import FallbackSpinner from './FallbackSpinner';
+import React, { useState, useEffect } from "react";
 
-function Skills({ header }) {
-  const [data, setData] = useState(null);
+const Skills = () => {
+  const [skillsData, setSkillsData] = useState(null);
 
   useEffect(() => {
-    fetch(endpoints.skills)
+    fetch("/profile/skills.json")
       .then((res) => res.json())
-      .then((res) => setData(res))
-      .catch((err) => console.error(err));
+      .then((data) => setSkillsData(data))
+      .catch((err) => console.error("Failed to load skills data:", err));
   }, []);
 
+  if (!skillsData) {
+    return <div className="text-white text-center text-xl">Loading...</div>;
+  }
+
   return (
-    <>
-      <Header title={header} />
-      {data ? (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-5xl mx-auto px-4 py-8"
-        >
-          <h4 className="whitespace-pre-wrap text-lg text-gray-700">
-            <ReactMarkdown>{data.intro}</ReactMarkdown>
-          </h4>
+    <div className="bg-black text-white min-h-screen flex flex-col items-center px-6 py-10">
+      {/* Title */}
+      <h1 className="text-5xl font-bold text-center mb-6">Skills</h1>
 
-          {data.skills?.map((rows) => (
-            <div key={rows.title} className="mt-6">
-              <h3 className="text-xl font-semibold text-gray-900">{rows.title}</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mt-4">
-                {rows.items.map((item) => (
-                  <motion.div 
-                    key={item.title} 
-                    className="flex flex-col items-center"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <img className="h-20 w-20 mb-2" src={item.icon} alt={item.title} />
-                    <p className="text-gray-800">{item.title}</p>
-                  </motion.div>
-                ))}
-              </div>
+      {/* Intro Text */}
+      <p className="text-lg text-center max-w-3xl mb-8">{skillsData.intro}</p>
+
+      {/* Skills Sections */}
+      <div className="w-full max-w-4xl">
+        {skillsData.skills.map((category, index) => (
+          <div key={index} className="mb-10">
+            <h2 className="text-2xl font-semibold text-center mb-4">{category.title}</h2>
+            <div className="flex flex-wrap justify-center gap-8">
+              {category.items.map((item, idx) => (
+                <div key={idx} className="flex flex-col items-center">
+                  <img
+                    src={item.icon}
+                    alt={item.title}
+                    className="w-16 h-16 md:w-20 md:h-20"
+                  />
+                  <span className="mt-2 text-lg">{item.title}</span>
+                </div>
+              ))}
             </div>
-          ))}
-        </motion.div>
-      ) : (
-        <FallbackSpinner />
-      )}
-    </>
+          </div>
+        ))}
+      </div>
+    </div>
   );
-}
-
-Skills.propTypes = {
-  header: PropTypes.string.isRequired,
 };
 
 export default Skills;

@@ -32,10 +32,10 @@ const Navbar = () => {
             (item, index) => (
               <NavLink
                 key={index}
-                to={`/${item.toLowerCase()}`}
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
                 className={({ isActive }) =>
-                  `relative hover:text-blue-400 transition ${
-                    isActive ? "text-blue-400" : ""
+                  `relative text-white transition hover:text-gray-300 ${
+                    isActive ? "after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-blue-400" : ""
                   }`
                 }
               >
@@ -73,8 +73,12 @@ const Navbar = () => {
             (item, index) => (
               <NavLink
                 key={index}
-                to={`/${item.toLowerCase()}`}
-                className="hover:text-blue-400 transition"
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                className={({ isActive }) =>
+                  `text-white transition hover:text-gray-300 ${
+                    isActive ? "border-b-2 border-blue-400" : ""
+                  }`
+                }
                 onClick={() => setIsOpen(false)}
               >
                 {item}

@@ -1,76 +1,58 @@
-import React, { useEffect, useState, useContext } from "react";
-import PropTypes from "prop-types";
-import { motion } from "framer-motion";
-import { ThemeContext } from "styled-components";
-import endpoints from "../constants/endpoints";
-import Header from "./Header";
-import FallbackSpinner from "./FallbackSpinner";
+import React, { useState, useEffect } from "react";
+import { FaGraduationCap } from "react-icons/fa";
 
-function Education({ header }) {
-  const theme = useContext(ThemeContext);
-  const [data, setData] = useState(null);
-  const [width, setWidth] = useState("50vw");
+const Education = () => {
+  const [educationData, setEducationData] = useState([]);
 
   useEffect(() => {
-    fetch(endpoints.education)
+    fetch("/profile/education.json")
       .then((res) => res.json())
-      .then((res) => setData(res))
-      .catch((err) => console.error(err));
-
-    const handleResize = () => {
-      if (window.innerWidth < 576) {
-        setWidth("90vw");
-      } else if (window.innerWidth < 768) {
-        setWidth("90vw");
-      } else if (window.innerWidth < 1024) {
-        setWidth("75vw");
-      } else {
-        setWidth("50vw");
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+      .then((data) => setEducationData(data.education))
+      .catch((err) => console.error("Failed to load education data:", err));
   }, []);
 
   return (
-    <>
-      <Header title={header} />
-      {data ? (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{ width }}
-          className="mx-auto p-4"
-        >
-          <div className="flex flex-col gap-6">
-            {data.education.map((education, index) => (
-              <div key={index} className="bg-white shadow-lg p-4 rounded-lg">
-                <h3 className="text-xl font-bold text-gray-800">{education.title}</h3>
-                <p className="text-gray-600">{education.institution}</p>
-                <p className="text-gray-500 text-sm">{education.year}</p>
-                {education.icon && (
-                  <img
-                    src={education.icon.src}
-                    alt={education.icon.alt}
-                    className="h-10 w-10 object-contain mt-2"
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      ) : (
-        <FallbackSpinner />
-      )}
-    </>
-  );
-}
+    <div className="bg-black text-white min-h-screen flex flex-col items-center px-4 py-10">
+      {/* Title */}
+      <h1 className="text-4xl md:text-5xl font-bold text-center mb-12">Education</h1>
 
-Education.propTypes = {
-  header: PropTypes.string.isRequired,
+      {/* Timeline Container */}
+      <div className="relative w-full max-w-3xl">
+        {/* Vertical Line */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px] bg-blue-600 hidden sm:block"></div>
+
+        {/* Timeline Events */}
+        {educationData.map((edu, index) => (
+          <div key={index} className="relative flex flex-col sm:flex-row items-center mb-12 w-full">
+            {/* Date Label */}
+            <div
+              className={`absolute ${
+                index % 2 === 0 ? "sm:left-[55%]" : "sm:right-[55%]"
+              } -top-3 bg-blue-600 text-white px-3 py-1 rounded-lg text-xs md:text-sm`}
+            >
+              {edu.title}
+            </div>
+
+            {/* Timeline Circle Icon (Visible only on larger screens) */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-black border-4 border-blue-600 rounded-full flex items-center justify-center hidden sm:flex">
+              <FaGraduationCap className="text-white text-xs" />
+            </div>
+
+            {/* Education Card */}
+            <div
+              className={`bg-gray-900 p-5 sm:p-6 rounded-xl shadow-lg w-full sm:w-[45%] ${
+                index % 2 === 0 ? "sm:ml-auto" : "sm:mr-auto"
+              }`}
+            >
+              <h3 className="text-lg md:text-xl font-semibold">{edu.cardTitle}</h3>
+              <h4 className="text-blue-400 font-medium">{edu.cardSubtitle}</h4>
+              <p className="text-gray-300 mt-2 text-sm md:text-base">{edu.cardDetailedText}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Education;
