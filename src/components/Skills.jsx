@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 const Skills = () => {
+  const { darkMode } = useTheme();
   const [skillsData, setSkillsData] = useState(null);
 
   useEffect(() => {
@@ -11,11 +13,19 @@ const Skills = () => {
   }, []);
 
   if (!skillsData) {
-    return <div className="text-white text-center text-xl">Loading...</div>;
+    return (
+      <div className={`text-xl text-center min-h-screen flex items-center justify-center transition-all duration-300
+        ${darkMode ? "text-white bg-gray-900" : "text-gray-900 bg-white"}`}
+      >
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col items-center px-6 py-10">
+    <div className={`min-h-screen flex flex-col items-center px-6 py-10 transition-all duration-300
+      ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}
+    >
       {/* Title */}
       <h1 className="text-5xl font-bold text-center mb-6">Skills</h1>
 
@@ -33,7 +43,7 @@ const Skills = () => {
                   <img
                     src={item.icon}
                     alt={item.title}
-                    className="w-16 h-16 md:w-20 md:h-20"
+                    className="w-16 h-16 md:w-20 md:h-20 transition-all duration-300"
                   />
                   <span className="mt-2 text-lg">{item.title}</span>
                 </div>

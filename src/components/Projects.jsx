@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 const Projects = () => {
   const [projectsData, setProjectsData] = useState([]);
-
+  const { darkMode } = useTheme();
   useEffect(() => {
     fetch("/profile/projects.json") // Fetch from public directory
       .then((response) => response.json())
@@ -11,7 +12,10 @@ const Projects = () => {
   }, []);
 
   return (
-    <section className="bg-black text-white py-12 px-4">
+    <section
+      className={`py-12 px-4 transition-all duration-300 
+      ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}
+    >
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
           Projects
@@ -19,10 +23,12 @@ const Projects = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projectsData.map((project, index) => (
-            <div
-              key={index}
-              className="bg-gray-900 rounded-2xl p-5 shadow-lg hover:shadow-2xl transition-shadow duration-300"
-            >
+          <div
+          key={index}
+          className={`rounded-2xl p-5 shadow-lg transition-all duration-300 
+            ${darkMode ? "bg-gray-800 hover:shadow-blue-500/50" : "bg-gray-100 hover:shadow-lg"}
+            hover:scale-[1.02]`}
+        >
               {project.image && (
                 <img
                   src={project.image}
@@ -32,7 +38,10 @@ const Projects = () => {
               )}
 
               <h3 className="text-2xl font-semibold">{project.title}</h3>
-              <p className="text-gray-300 text-sm mt-2 whitespace-pre-line">
+              <p
+                className={`text-sm mt-2 whitespace-pre-line 
+  ${darkMode ? "text-gray-300" : "text-gray-700"}`}
+              >
                 {project.bodyText}
               </p>
 

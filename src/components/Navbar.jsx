@@ -69,7 +69,7 @@ const Navbar = () => {
             onClick={() => setDarkMode(!darkMode)}
             className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"
           >
-            {darkMode ? <SunIcon className="w-6 h-6 text-yellow-400" /> : <MoonIcon className="w-6 h-6 text-gray-900" />}
+            {darkMode ?<MoonIcon className="w-6 h-6 text-gray-900" />  : <SunIcon className="w-6 h-6 text-yellow-400" />}
           </button>
 
           {/* Mobile Menu Button */}

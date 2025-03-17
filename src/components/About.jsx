@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 const About = () => {
+  const { darkMode } = useTheme();
   const [aboutData, setAboutData] = useState({ about: "", imageSource: "" });
 
   useEffect(() => {
@@ -11,7 +13,9 @@ const About = () => {
   }, []);
 
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col items-center p-6 md:p-10">
+    <div className={`min-h-screen flex flex-col items-center p-6 md:p-10 transition-all duration-300 
+      ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}
+    >
       {/* Centered Title */}
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">About</h1>
 
@@ -28,7 +32,8 @@ const About = () => {
             <img
               src={aboutData.imageSource}
               alt="Profile"
-              className="w-60 h-60 md:w-80 md:h-80 object-cover bg-white p-2 rounded-lg"
+              className={`w-60 h-60 md:w-80 md:h-80 object-cover p-2 rounded-lg transition-all duration-300 
+                ${darkMode ? "bg-gray-800" : "bg-gray-100"}`}
             />
           )}
         </div>
