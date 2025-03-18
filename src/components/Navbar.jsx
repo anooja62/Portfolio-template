@@ -30,7 +30,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center max-w-6xl mx-auto">
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <span className="text-lg font-bold">Lorem Ipsum</span>
+          <span className="text-lg font-bold">Anooja M</span>
         </div>
 
         {/* Desktop Menu */}

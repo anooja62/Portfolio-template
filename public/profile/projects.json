@@ -1,150 +1,78 @@
 {
     "projects" : [
         {
-            "image" : "images/projects/portfolio-poster.png",
+            "image" : "images/projects/portfolioImg.png",
             "title": "Dev Portfolio",
-            "bodyText": "- Developer Portfolio Website made in React\n -  Fully customisable and dynamic, easily change data and images.\n - Dark Mode Support",
+            "bodyText": "- Developer Portfolio Website made in React\n -  Fully customisable and dynamic, easily change data and images.\n - Dark Mode Support. \n - Mobile Responsiveness",
             "links": [
                 {
                     "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/dev-portfolio"
+                    "href": "https://github.com/anooja62/Portfolio-template.git"
                 },
                 {
                     "text": "Live",
-                    "href": "https://mayankagarwal.me"
+                    "href": "https://portfolio-template-bay-delta.vercel.app/"
                 }
             ],
             "tags" : [
                 "React",
+                "Tailwind css",
                 "Portfolio",
                 "JavaScript"
+                
             ]
         },
         {
-            "image" : "images/projects/caaring-poster.png",
-            "title": "Caaring -  Cab Share App",
-            "bodyText": "- A Cab Sharing web app made using **Django** for **VIT** Students. People can create a new cab or request to join an existing cab.\n - Added User authentication and password reset using **SendGrid**.\n - Deployed on **heroku** using **gunicorn**.",
+            "image" : "images/projects/cloudX.png",
+            "title": "Cloudx | Personal cloud drive",
+            "bodyText": "- Developed a Google Drive-like cloud storage solution, enabling users to upload, preview, and manage files.\n -  Integrated AWS S3 for secure and scalable file storage.\n - Built a Node.js/Express backend with MongoDB, ensuring efficient and scalable data handling\n - Utilized React Query for optimized data fetching, caching, and real-time updates.\n - Designed a modern, responsive UI using Tailwind CSS.\n - Deployed the full-stack application on Vercel for seamless access.",
             "links": [
                 {
                     "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/Caaring"
+                    "href": "https://github.com/anooja62/CloudX.git"
                 },
                 {
                     "text": "Live",
-                    "href": "http://caaring.herokuapp.com"
+                    "href": "https://cloud-x-navy.vercel.app/"
                 }
             ],
             "tags" : [
-                "Python",
-                "Django",
-                "BootStrap",
-                "SendGrid",
-                "Heroku",
-                "Gunicorn",
-                "VIT"
-            ]
-        },
-        {
-            "image" : "images/projects/quiet-hours-poster.jpg",
-            "title": "Quiet Hours App",
-            "bodyText": "- An Android App that **automatically silences** your phone during class hours, designed for **VITians**.\n - Option to select class **slots** and **custom time**.\n - Option to put on Vibrate instead of Silent.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/QuietHours-Android"
-                }
-            ],
-            "tags" : [
-                "Java",
-                "Android",
-                "Alarm Manager",
-                "VIT"
-            ]
-        },
-        {
-            "title": "Secure Chat App",
-            "bodyText": "- An Android App that allows users to send texts in real time.\n - End to End encryption using **RSA** Algorithm.\n - Uses **Firebase** database to store texts.\n - Secured with **Fingerprint** lock.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/SecureChatApp"
-                }
-            ],
-            "tags" : [
-                "Java",
-                "Android",
-                "Firebase",
-                "RSA"
-            ]
-        },
-        {
-            "title": "MVVM Sample App",
-            "bodyText": "- An Android App that loads data from mock API and show in both **LinearLayout** and **GridLayout RecyclerView**.\n - Offline support using **Room** DB and **NetworkBoundResource**.\n - Uses the **MVVM** architecture.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/mvvm-sample-app"
-                }
-            ],
-            "tags" : [
-                "Kotlin",
-                "Android",
-                "MVVM",
-                "Room",
-                "Coroutines",
-                "Flow",
-                "Hilt-Dagger",
-                "NetworkBoundResource"
-            ]
-        },
-        {
-            "title": "Feed List App",
-            "bodyText": "- An Android App that loads list of feeds from a **paginated** API and shows in a RecyclerView.\n - Uses the **MVVM** architecture.\n - Uses **Paging 3** library along with other Architecture Components.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/Paginated-App-Feeds-List"
-                }
-            ],
-            "tags" : [
-                "Kotlin",
-                "Android",
-                "MVVM",
-                "Paging 3",
-                "Coroutines",
-                "Flow"
-            ]
-        },
-        {
-            "title": "Task Tracker",
-            "bodyText": "- A simple Task Tracker web app made with **Angular 12**.\n - Uses **mock JSON server** to get, add, delete or update tasks.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/task-tracker-app"
-                }
-            ],
-            "tags" : [
+                "React",
                 "TypeScript",
-                "Angular 12",
-                "JavaScript"
+                "AWS S3",
+                "Firebase",
+                "React Query",
+                "Tailwind CSS",
+                "Node.js",
+                "Express.js",
+                "MongoDB"
             ]
         },
         {
-            "title": "Image Encryption/Decryption",
-            "bodyText": "- A Web App for Image Encryption and Decryption made in **Django**.\n - Uses **SDES** algorithm for encryption/decryption.",
+            "image" : "images/projects/deliorder.png",
+            "title": "Deliorder",
+            "bodyText": "- Created a full-stack food delivery website using MERN stack.\n - Provides a convenient and reliable way for users to order food from their favorite restaurants.\n - Integrated Razorpay for secure ordering and payment.\n - Deployed the website on Render for reliability a n d scalability.",
             "links": [
                 {
                     "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/img-encrypt-sdes"
+                    "href": "https://github.com/anooja62/Food-Delivery-Front-End.git"
+                },
+                {
+                    "text": "Live",
+                    "href": "https://deliorder.onrender.com/home"
                 }
             ],
             "tags" : [
-                "Python",
-                "Django",
-                "SDES",
-                "Cryptography"
+                "React",
+                "Redux",
+                "MongoDB",
+                "Node.js"
             ]
         }
+     
+     
+
+   
+   
     ]
 }

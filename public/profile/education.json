@@ -1,17 +1,23 @@
 {
     "education":[
         {
-            "title": "Jun 20XX - Jun 20YY",
-            "cardTitle": "B.Tech, Computer Science",
-            "cardSubtitle":"XYZ University, City",
-            "cardDetailedText": "CGPA - 9.5"
+            "title": "Aug 2018 - May 2023",
+            "cardTitle": "Master of Computer Applications",
+            "cardSubtitle":"Amal Jyothi Collage of Engineering, Kottayam",
+            "cardDetailedText": "CGPA - 8.15"
           
         },
         {
-            "title": "Apr 20XX",
-            "cardTitle": "High School",
-            "cardSubtitle":"ABC School, City",
-            "cardDetailedText": "Marks - 95%"
+            "title": "Mar 2018",
+            "cardTitle": "Higher secondary",
+            "cardSubtitle":"GVHSS Nadakkavu, Calicut",
+            "cardDetailedText": "Marks - 83%"
+        },
+        {
+            "title": "Mar 2016",
+            "cardTitle": "SSLC",
+            "cardSubtitle":"BEMGHSS, Calicut",
+            "cardDetailedText": "Marks - 94%"
         }
     ]
 }
