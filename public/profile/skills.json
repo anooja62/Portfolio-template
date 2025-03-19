@@ -15,6 +15,10 @@
                 {
                     "icon": "images/skills/mysql.png",
                     "title": "MySQL"
+                },
+                {
+                    "icon": "images/skills/mongodb.png",
+                    "title": "MongoDB"
                 }
         ]},
         {
@@ -31,6 +35,10 @@
                 {
                     "icon": "images/skills/nodejs.png",
                     "title": "Nodejs"
+                },
+                {
+                    "icon": "images/skills/reactnative.png",
+                    "title": "React Native"
                 }
             ]
         },
